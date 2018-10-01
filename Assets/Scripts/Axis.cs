@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Experimental.Audio.Google;
 using UnityEngine.Serialization;
 
 public class Axis : MonoBehaviour, IPointerClickHandler, SwipeHandler.Handler {
