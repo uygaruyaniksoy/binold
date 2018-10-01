@@ -13,6 +13,7 @@
         <e p="Scripts" t="Include">
           <e p="Arrow.cs" t="Include" />
           <e p="Axis.cs" t="Include" />
+          <e p="Border.cs" t="Include" />
           <e p="Game.cs" t="Include" />
           <e p="Glow.cs" t="Include" />
           <e p="Highlightable.cs" t="Include" />

@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Arrow.cs" />
     <Compile Include="Assets\Scripts\Axis.cs" />
+    <Compile Include="Assets\Scripts\Border.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\Glow.cs" />
     <Compile Include="Assets\Scripts\Highlightable.cs" />

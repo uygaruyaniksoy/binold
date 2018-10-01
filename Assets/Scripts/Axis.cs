@@ -27,6 +27,7 @@ public class Axis : MonoBehaviour, IPointerClickHandler, SwipeHandler.Handler {
 	private void OnMouseUp() {
 		_lock = false;
 		_camera.GetComponent<RotateCamera>().Lock = false;
+		_camera.GetComponent<RotateCamera>().CheckSideValidity();
 		if (_game.CheckValidity()) {
 			_game.HandleLevelOver();
 		}

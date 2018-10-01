@@ -15,13 +15,11 @@ public class GameEditor : Editor {
     private Dictionary<string, GameObject> _dictionary = new Dictionary<string, GameObject>();
 
     private int _level;
-    private bool _dictionarySetup;
 
     private void SetupDictionary() {
         foreach (var prefab in Selection.activeGameObject.GetComponent<Game>().Prefabs) {
             _dictionary.Add(prefab.name, prefab);
         }
-        _dictionarySetup = true;
     }
 
     public override void OnInspectorGUI() {

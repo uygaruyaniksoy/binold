@@ -9,6 +9,7 @@ public class Game : MonoBehaviour {
     public GameObject GameObjects;
     public GameObject Result;
     public GameObject[] Prefabs;
+    public Border InnerBorder;
     private readonly Dictionary<string, GameObject> _dictionary = new Dictionary<string, GameObject>();
     private struct ObjTransform {
         public readonly string Name;
@@ -18,21 +19,27 @@ public class Game : MonoBehaviour {
             Pos = pos;
         }
     }
+
+    public int XAXIS = 1;
+    public int YAXIS = 2;
+    public int ZAXIS = 4;
     
     private void Start() {
         foreach (var prefab in Prefabs) {
             _dictionary.Add(prefab.name, prefab);
         }
         CreateLevel();
+        
+        Camera.main.GetComponent<RotateCamera>().CheckSideValidity();
     }
-
+    
     public void CreateLevel(int level = 0) {
         ClearLevel();
         CreateLevelObjects(level);
         CreateResultObjects(level);
     }
 
-    public bool CheckValidity() {
+    public bool CheckValidity(int axes = 7) {
         var results = new List<ObjTransform>();
         var objects = new List<ObjTransform>();
         var resCenter = new Vector3(0,0,0);
@@ -42,10 +49,16 @@ public class Game : MonoBehaviour {
         for (var i = 0; i < objCount; i++) {
             var res = Result.transform.GetChild(i);
             var obj = GameObjects.transform.GetChild(i);
-            results.Add(new ObjTransform(res.name, new Vector3(res.position.x, res.position.y, res.position.z)));
-            objects.Add(new ObjTransform(obj.name, new Vector3(obj.position.x, obj.position.y, obj.position.z)));
-            resCenter += res.position;
-            objCenter += obj.position;
+            results.Add(new ObjTransform(res.name, new Vector3(
+                (axes & XAXIS) > 0 ? res.position.x : 0, 
+                (axes & YAXIS) > 0 ? res.position.y : 0,
+                (axes & ZAXIS) > 0 ? res.position.z : 0)));
+            objects.Add(new ObjTransform(obj.name, new Vector3(
+                (axes & XAXIS) > 0 ? obj.position.x : 0, 
+                (axes & YAXIS) > 0 ? obj.position.y : 0,
+                (axes & ZAXIS) > 0 ? obj.position.z : 0)));
+            resCenter += results[i].Pos;
+            objCenter += objects[i].Pos;
         }
         resCenter *= 1f / objCount;
         objCenter *= 1f / objCount;
@@ -68,8 +81,11 @@ public class Game : MonoBehaviour {
             distance += closestDist;
             objects.Remove(closest);
         }
-//        Debug.Log("Distance is: " + distance);
 
+//        var debugmsg = "" + ((axes & XAXIS) > 0 ? "XAXIS " : "") +
+//                   ((axes & YAXIS) > 0 ? "YAXIS " : "") +
+//                   ((axes & ZAXIS) > 0 ? "ZAXIS " : "") + distance;
+//        Debug.Log(debugmsg);
         return distance < objCount * 0.05;
     }
 
