@@ -51,7 +51,7 @@ public class RotateCamera : MonoBehaviour, SwipeHandler.Handler {
 	}
 
 	public void RightSwipeHandler() {
-		if (_isRotating || Time.deltaTime < 0.01f || !State || Lock) return;
+		if (_isRotating || Time.deltaTime < 0.01f || !State || Lock || _glowCamera.GetComponent<Glow>().GlowObject != null) return;
 		_isRotating = true;
 		_rotationMultiplier = 1;
 		_rotationFramesLeft = (int) (RotationTime / 1000f / Time.deltaTime);
@@ -64,7 +64,7 @@ public class RotateCamera : MonoBehaviour, SwipeHandler.Handler {
 	}
 	
 	public void LeftSwipeHandler(){
-		if (_isRotating || Time.deltaTime < 0.01f || State || Lock) return;
+		if (_isRotating || Time.deltaTime < 0.01f || State || Lock || _glowCamera.GetComponent<Glow>().GlowObject != null) return;
 		_isRotating = true;
 		_rotationMultiplier = -1;
 		_rotationFramesLeft = (int) (RotationTime / 1000f / Time.deltaTime);

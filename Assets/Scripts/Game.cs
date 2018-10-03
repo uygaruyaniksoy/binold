@@ -20,8 +20,11 @@ public class Game : MonoBehaviour {
         }
     }
 
+    [HideInInspector]
     public int XAXIS = 1;
+    [HideInInspector]
     public int YAXIS = 2;
+    [HideInInspector]
     public int ZAXIS = 4;
     
     private void Start() {
