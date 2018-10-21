@@ -8,6 +8,8 @@ using UnityEngine;
 public class Game : MonoBehaviour {
     public GameObject GameObjects;
     public GameObject Result;
+    public GameObject TopRight;
+    public GameObject Arrow;
     public GameObject[] Prefabs;
     public Border InnerBorder;
     private readonly Dictionary<string, GameObject> _dictionary = new Dictionary<string, GameObject>();
@@ -31,7 +33,11 @@ public class Game : MonoBehaviour {
         foreach (var prefab in Prefabs) {
             _dictionary.Add(prefab.name, prefab);
         }
-        CreateLevel();
+        
+        // hide minimap before levels start and lock rotation
+        Camera.main.GetComponent<RotateCamera>().Lock = true;
+        TopRight.SetActive(false);
+//        CreateLevel();
         
         Camera.main.GetComponent<RotateCamera>().CheckSideValidity();
     }
@@ -40,6 +46,7 @@ public class Game : MonoBehaviour {
         ClearLevel();
         CreateLevelObjects(level);
         CreateResultObjects(level);
+        TopRight.SetActive(true);
     }
 
     public bool CheckValidity(int axes = 7) {
@@ -100,6 +107,9 @@ public class Game : MonoBehaviour {
         for (int i = 0; i < GameObjects.transform.childCount; i++) {
             Destroy(GameObjects.transform.GetChild(i).gameObject);
         }
+        for (int i = 0; i < Result.transform.childCount; i++) {
+            Destroy(Result.transform.GetChild(i).gameObject);
+        }
     }
 
     private void CreateLevelObjects(int level) {
@@ -112,7 +122,7 @@ public class Game : MonoBehaviour {
                 Quaternion.Euler(float.Parse(opts[4]), float.Parse(opts[5]), float.Parse(opts[6]))
             );
             obj.transform.SetParent(transform);
-            var arrow = Instantiate(_dictionary["Arrow"],
+            var arrow = Instantiate(Arrow,
                 new Vector3(float.Parse(opts[1]), float.Parse(opts[2]), float.Parse(opts[3])),
                 Quaternion.Euler(0,0,0)
             );

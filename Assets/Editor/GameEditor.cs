@@ -15,6 +15,7 @@ public class GameEditor : Editor {
     private Dictionary<string, GameObject> _dictionary = new Dictionary<string, GameObject>();
 
     private int _level;
+    private int _startlevel;
 
     private void SetupDictionary() {
         foreach (var prefab in Selection.activeGameObject.GetComponent<Game>().Prefabs) {
@@ -24,6 +25,11 @@ public class GameEditor : Editor {
 
     public override void OnInspectorGUI() {
         if (GUILayout.Button("Setup Dictionary")) SetupDictionary();
+        
+        GUILayout.BeginHorizontal();
+        _startlevel = EditorGUILayout.IntField("Level", _startlevel);
+        if (GUILayout.Button("Start Level")) Selection.activeGameObject.GetComponent<Game>().CreateLevel(_startlevel);
+        GUILayout.EndHorizontal();
         
         base.OnInspectorGUI();
         GUILayout.Space(16f);

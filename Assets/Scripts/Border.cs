@@ -13,11 +13,13 @@ public class Border : MonoBehaviour {
 	}
 
 	public void SetBlinking(Color firstColor, Color secondColor) {
+		if (!gameObject.activeInHierarchy) return;
 		_blinking = true;
 		StartCoroutine(shiftColor(firstColor, secondColor, true));
 	}
 
 	public void StopBlinking() {
+		if (!gameObject.activeInHierarchy) return;
 		StartCoroutine(shiftColor(GetComponent<Image>().color, Color.black, true));
 		_blinking = false;
 	}
