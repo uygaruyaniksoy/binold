@@ -20,7 +20,5 @@ public class WiggleText : MonoBehaviour {
 		_dilation += Rate;
 		TextMaterial.SetFloat("_FaceDilate", _dilation);
 		TextMaterial.SetFloat("_OutlineSoftness", Upper - _dilation);
-		Debug.Log(_dilation);
-		// _FaceDilate
 	}
 }
