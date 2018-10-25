@@ -7,6 +7,7 @@ public class Highlightable : MonoBehaviour, IPointerClickHandler {
     public GameObject arrow;
     
     public void OnMouseDown() {
+        if (EventSystem.current.IsPointerOverGameObject()) return;
         var glowObject = Camera.main.transform.GetChild(1).GetComponent<Glow>().GlowObject;
         if (glowObject != null) {
             Camera.main.transform.GetChild(1).GetComponent<Glow>().Deactivate();
