@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Runtime.Remoting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour {
     public GameObject GameObjects;
@@ -34,7 +35,11 @@ public class Game : MonoBehaviour {
 
     private int level;
 
+    public CanvasScaler MainCanvasScaler;
+
     private void Start() {
+        //MainCanvasScaler.scaleFactor = Screen.width / 800f; 
+        
         foreach (var prefab in Prefabs) {
             _dictionary.Add(prefab.name, prefab);
         }
