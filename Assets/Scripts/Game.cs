@@ -108,8 +108,10 @@ public class Game : MonoBehaviour {
 
     public void HandleLevelOver() {
         Camera.main.GetComponent<RotateCamera>().Lock = true;
+        Highlightable.Locked = true;
         PauseButton.SetActive(false);
         LevelOverMenu.SetActive(true);
+        LevelOverMenu.GetComponent<LevelOver>().Animate();
         if (Camera.main.GetComponent<PostProcessing>().GlowCamera.GetComponent<Glow>().GlowObject != null) {
             Camera.main.GetComponent<PostProcessing>().GlowCamera.GetComponent<Glow>().GlowObject.GetComponent<Highlightable>().arrow.SetActive(false);
             Camera.main.transform.GetChild(1).GetComponent<Glow>().Deactivate();
@@ -130,6 +132,7 @@ public class Game : MonoBehaviour {
         PauseMenu.SetActive(true);
         TopRight.SetActive(false);
         Camera.main.GetComponent<RotateCamera>().Lock = true;
+        Highlightable.Locked = true;
     }
     
     public void ResumeGame() {
@@ -137,6 +140,7 @@ public class Game : MonoBehaviour {
         PauseMenu.SetActive(false);
         TopRight.SetActive(true);
         Camera.main.GetComponent<RotateCamera>().Lock = false;
+        Highlightable.Locked = false;
     }
 
     public void ClearLevel() {
@@ -158,6 +162,7 @@ public class Game : MonoBehaviour {
             Camera.main.transform.GetChild(1).GetComponent<Glow>().Deactivate();
         }
         Camera.main.GetComponent<RotateCamera>().Lock = false;
+        Highlightable.Locked = false;
         LevelOverMenu.SetActive(false);
         CreateLevel(++level);
     }

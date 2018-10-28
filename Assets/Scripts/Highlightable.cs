@@ -5,8 +5,10 @@ using UnityEngine.EventSystems;
 
 public class Highlightable : MonoBehaviour, IPointerClickHandler {
     public GameObject arrow;
+    public static bool Locked;
     
     public void OnMouseDown() {
+        if (Locked) return;
         if (EventSystem.current.IsPointerOverGameObject()) return;
         var glowObject = Camera.main.transform.GetChild(1).GetComponent<Glow>().GlowObject;
         if (glowObject != null) {
@@ -18,6 +20,7 @@ public class Highlightable : MonoBehaviour, IPointerClickHandler {
         var state = Camera.main.GetComponent<RotateCamera>().State;
         arrow.GetComponent<Arrow>().UpdateState(state);
     }
+
 
     public void OnPointerClick(PointerEventData eventData) {
         OnMouseDown();
