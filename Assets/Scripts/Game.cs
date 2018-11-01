@@ -14,6 +14,7 @@ public class Game : MonoBehaviour {
     public GameObject Arrow;
     public GameObject[] Prefabs;
     public GameObject PauseButton;
+    public GameObject MainMenu;
     public GameObject PauseMenu;
     public GameObject LevelOverMenu;
     public Border InnerBorder;
@@ -43,6 +44,7 @@ public class Game : MonoBehaviour {
     public CanvasScaler MainCanvasScaler;
 
     private void Start() {
+        MainMenu.SetActive(true);
         //MainCanvasScaler.scaleFactor = Screen.width / 800f; 
         //string levels = PlayerPrefs.GetString("Levels", "\0\0\0\0");
         LevelStatus = PlayerPrefs.GetString("Levels", "" +
