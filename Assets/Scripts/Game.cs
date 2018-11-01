@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -34,11 +35,22 @@ public class Game : MonoBehaviour {
     public int ZAXIS = 4;
 
     private int level;
+    
+    public string LevelStatus;
+    public int page = 0;
+    public int pageLimit = 4;
 
     public CanvasScaler MainCanvasScaler;
 
     private void Start() {
         //MainCanvasScaler.scaleFactor = Screen.width / 800f; 
+        //string levels = PlayerPrefs.GetString("Levels", "\0\0\0\0");
+        LevelStatus = PlayerPrefs.GetString("Levels", "" +
+            // pagelimit(4) * 10 levels
+            (char)1024 + 
+            (char)1024 + 
+            (char)1024 + 
+            (char)1024);
         
         foreach (var prefab in Prefabs) {
             _dictionary.Add(prefab.name, prefab);
@@ -117,6 +129,12 @@ public class Game : MonoBehaviour {
             Camera.main.transform.GetChild(1).GetComponent<Glow>().Deactivate();
         }
         Debug.Log("Level is over");
+        TopRight.SetActive(false);
+        var ch = LevelStatus[page];
+        LevelStatus = LevelStatus.Remove(page, 1);
+        LevelStatus = LevelStatus.Insert(page, ""+(char)(ch| (1 << (level % 10)))); 
+        
+        PlayerPrefs.SetString("Levels", LevelStatus);
     }
 
     public void ExitGame() {
@@ -154,6 +172,7 @@ public class Game : MonoBehaviour {
         for (int i = 0; i < Result.transform.childCount; i++) {
             Destroy(Result.transform.GetChild(i).gameObject);
         }
+        TopRight.SetActive(false);
     }
 
     public void NextLevel() {
@@ -165,6 +184,10 @@ public class Game : MonoBehaviour {
         Highlightable.Locked = false;
         LevelOverMenu.SetActive(false);
         CreateLevel(++level);
+    }
+
+    public void Mailto() {
+        Application.OpenURL("mailto:uygaruyaniksoy@gmail.com?subject=binold");
     }
 
     private void CreateLevelObjects(int level) {

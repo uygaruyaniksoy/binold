@@ -56,18 +56,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\LevelOver.cs" />
     <Compile Include="Assets\Scripts\Arrow.cs" />
     <Compile Include="Assets\Scripts\Axis.cs" />
     <Compile Include="Assets\Scripts\Border.cs" />
     <Compile Include="Assets\Scripts\Game.cs" />
     <Compile Include="Assets\Scripts\Glow.cs" />
     <Compile Include="Assets\Scripts\Highlightable.cs" />
+    <Compile Include="Assets\Scripts\LevelOver.cs" />
+    <Compile Include="Assets\Scripts\LevelSelectMenu.cs" />
     <Compile Include="Assets\Scripts\PlaneContainer.cs" />
     <Compile Include="Assets\Scripts\PostProcessing.cs" />
     <Compile Include="Assets\Scripts\ResultCamera.cs" />
     <Compile Include="Assets\Scripts\RotateCamera.cs" />
     <Compile Include="Assets\Scripts\SwipeHandler.cs" />
+    <Compile Include="Assets\Scripts\WiggleImage.cs" />
     <Compile Include="Assets\Scripts\WiggleText.cs" />
     <None Include="Assets\Shaders\Blur.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
