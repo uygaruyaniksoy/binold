@@ -64,9 +64,9 @@ public class GameEditor : Editor {
                     child.position.x.ToString(),
                     child.position.y.ToString(),
                     child.position.z.ToString(),
-                    child.rotation.x.ToString(),
-                    child.rotation.y.ToString(),
-                    child.rotation.z.ToString()
+                    child.rotation.eulerAngles.x.ToString(),
+                    child.rotation.eulerAngles.y.ToString(),
+                    child.rotation.eulerAngles.z.ToString()
                 };
                 _startingObjects.Add(string.Join(",", strings.ToArray()));
                 _objectNames.Add(child.name);
@@ -91,9 +91,9 @@ public class GameEditor : Editor {
                     child.position.x.ToString(),
                     child.position.y.ToString(),
                     child.position.z.ToString(),
-                    child.rotation.x.ToString(),
-                    child.rotation.y.ToString(),
-                    child.rotation.z.ToString()
+                    child.rotation.eulerAngles.x.ToString(),
+                    child.rotation.eulerAngles.y.ToString(),
+                    child.rotation.eulerAngles.z.ToString()
                 };
                 _endObjects.Add(string.Join(",", strings.ToArray()));
                 _objectNames.Add(child.name);
