@@ -22,9 +22,11 @@ public class Game : MonoBehaviour {
     private struct ObjTransform {
         public readonly string Name;
         public readonly Vector3 Pos;
-        public ObjTransform(string name, Vector3 pos) {
+        public readonly Vector3 Rot;
+        public ObjTransform(string name, Vector3 pos, Vector3 rot) {
             Name = name;
             Pos = pos;
+            Rot = rot;
         }
     }
 
@@ -67,6 +69,7 @@ public class Game : MonoBehaviour {
     }
     
     public void CreateLevel(int level = 0) {
+        level = level + page * 10;
         this.level = level;
         ClearLevel();
         CreateLevelObjects(level);
@@ -87,11 +90,13 @@ public class Game : MonoBehaviour {
             results.Add(new ObjTransform(res.name, new Vector3(
                 (axes & XAXIS) > 0 ? res.position.x : 0, 
                 (axes & YAXIS) > 0 ? res.position.y : 0,
-                (axes & ZAXIS) > 0 ? res.position.z : 0)));
+                (axes & ZAXIS) > 0 ? res.position.z : 0),
+                res.rotation.ToEulerAngles()));
             objects.Add(new ObjTransform(obj.name, new Vector3(
                 (axes & XAXIS) > 0 ? obj.position.x : 0, 
                 (axes & YAXIS) > 0 ? obj.position.y : 0,
-                (axes & ZAXIS) > 0 ? obj.position.z : 0)));
+                (axes & ZAXIS) > 0 ? obj.position.z : 0),
+                obj.rotation.ToEulerAngles()));
             resCenter += results[i].Pos;
             objCenter += objects[i].Pos;
         }
@@ -100,8 +105,8 @@ public class Game : MonoBehaviour {
         
         // Normalize
         for (var i = 0; i < objCount; i++) {
-            results[i] = new ObjTransform(results[i].Name, results[i].Pos - resCenter);
-            objects[i] = new ObjTransform(objects[i].Name, objects[i].Pos - objCenter);
+            results[i] = new ObjTransform(results[i].Name, results[i].Pos - resCenter, results[i].Rot);
+            objects[i] = new ObjTransform(objects[i].Name, objects[i].Pos - objCenter, objects[i].Rot);
         }
         var distance = 0f;
         for (var i = 0; i < objCount; i++) {
@@ -109,7 +114,9 @@ public class Game : MonoBehaviour {
             ObjTransform closest = objects[0];
             var closestDist = float.PositiveInfinity;
             foreach (var obj in objects) {
-                if ((obj.Pos - res.Pos).magnitude > closestDist || !obj.Name.Equals(res.Name)) continue;
+                if ((obj.Pos - res.Pos).magnitude > closestDist ||
+                    !obj.Name.Equals(res.Name) ||
+                    !obj.Rot.Equals(res.Rot)) continue;
                 closest = obj;
                 closestDist = (obj.Pos - res.Pos).magnitude;
             }
