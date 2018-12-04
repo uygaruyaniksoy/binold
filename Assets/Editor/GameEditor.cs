@@ -19,11 +19,13 @@ public class GameEditor : Editor {
 
     private void SetupDictionary() {
         foreach (var prefab in Selection.activeGameObject.GetComponent<Game>().Prefabs) {
-            _dictionary.Add(prefab.name, prefab);
+            if (!_dictionary.ContainsKey(prefab.name))
+                _dictionary.Add(prefab.name, prefab);
         }
     }
 
     public override void OnInspectorGUI() {
+        SetupDictionary();
         if (GUILayout.Button("Setup Dictionary")) SetupDictionary();
         
         GUILayout.BeginHorizontal();

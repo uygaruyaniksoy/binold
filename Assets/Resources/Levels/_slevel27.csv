@@ -1,0 +1,5 @@
+name,px,py,pz,rx,ry,rz
+Cylinder,0,1,-5.5,0,0,0
+Cylinder,0,1,-4.75,90,0,0
+Cylinder,0,1,-5.25,0,0,90
+Sphere,0,1,-4,0,0,0

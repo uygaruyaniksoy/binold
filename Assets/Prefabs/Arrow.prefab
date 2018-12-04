@@ -676,7 +676,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a135a7a17184a8e8f761b36907195f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveFactor: {x: 0, y: 0.01, z: 0}
+  MoveVector: {x: 0, y: 0.01, z: 0}
 --- !u!114 &114655055476206418
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -702,7 +702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a135a7a17184a8e8f761b36907195f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveFactor: {x: 0.01, y: 0, z: 0}
+  MoveVector: {x: 0.01, y: 0, z: 0}
 --- !u!114 &114784576263297124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -714,4 +714,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a135a7a17184a8e8f761b36907195f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveFactor: {x: 0, y: 0, z: 0.01}
+  MoveVector: {x: 0, y: 0, z: 0.01}
