@@ -10,7 +10,7 @@ public class LevelSelectMenu : MonoBehaviour {
 	public void CreateUI() {
 		Game game = GameObject.Find("Game").GetComponent<Game>();
 		int page = game.page;
-		for (int i = 0; i < 10; i++) {
+		for (var i = 0; i < 10; i++) {
 			gameObject.transform
 				.GetChild(i + 1)
 				.GetChild(0)
@@ -20,11 +20,9 @@ public class LevelSelectMenu : MonoBehaviour {
 				.GetChild(1)
 				.gameObject.SetActive((game.LevelStatus[page] & (1 << i)) != 0);
 		}
-		if (page == 0) _left.SetActive(false);
-		else _left.SetActive(true);
-		
-		if (page == game.pageLimit - 1) _right.SetActive(false);
-		else _right.SetActive(true);
+
+		_left.SetActive(page != 0);
+		_right.SetActive(page != game.pageLimit - 1);
 	}
 
 	public void OnLeft() {

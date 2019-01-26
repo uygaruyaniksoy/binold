@@ -7331,7 +7331,7 @@ MonoBehaviour:
   ZAXIS: 4
   LevelStatus: 
   page: 0
-  pageLimit: 4
+  pageLimit: 3
   MainCanvasScaler: {fileID: 537686862}
 --- !u!1 &1199302004
 GameObject:

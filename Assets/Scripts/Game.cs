@@ -41,7 +41,7 @@ public class Game : MonoBehaviour {
     
     public string LevelStatus;
     public int page = 0;
-    public int pageLimit = 4;
+    public int pageLimit = 3;
 
     public CanvasScaler MainCanvasScaler;
 
@@ -51,7 +51,6 @@ public class Game : MonoBehaviour {
         //string levels = PlayerPrefs.GetString("Levels", "\0\0\0\0");
         LevelStatus = PlayerPrefs.GetString("Levels", "" +
             // pagelimit(4) * 10 levels
-            (char)1024 + 
             (char)1024 + 
             (char)1024 + 
             (char)1024);
